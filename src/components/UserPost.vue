@@ -12,12 +12,7 @@
       </div>
       <div class="post__title-wrapper">
         <p class="post__author">{{ image.user.name }}</p>
-        <p
-          v-if="username"
-          class="post__account"
-        >
-          @{{ username }}
-        </p>
+        <p v-if="username" class="post__account">@{{ username }}</p>
       </div>
     </a>
     <div class="post__image">

@@ -8,25 +8,38 @@
       />
     </div>
   </div>
+  <page-pagination
+    :page="page"
+    @change-page="page = $event"
+  />
 </template>
 
 <script>
 import getImages from '@/api';
 import UserPost from '@/components/UserPost.vue';
+import PagePagination from '@/components/PagePagination.vue';
 
 export default {
   components: {
     UserPost,
+    PagePagination,
   },
 
   data() {
     return {
       images: null,
+      page: 1,
     };
   },
 
   async mounted() {
     this.images = await getImages();
+  },
+
+  watch: {
+    async page() {
+      this.images = await getImages(this.page);
+    },
   },
 };
 </script>
