@@ -8,10 +8,7 @@
       />
     </div>
   </div>
-  <page-pagination
-    :page="page"
-    @change-page="page = $event"
-  />
+  <page-pagination v-model="page" />
 </template>
 
 <script>

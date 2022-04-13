@@ -6,10 +6,10 @@
         :key="idx"
         class="pagination__list-item"
         :class="{
-          'pagination__list-item--active': item === this.page,
+          'pagination__list-item--active': item === modelValue,
           'pagination__list-item--disabled': item === '...'
         }"
-        @click="$emit('change-page', item)"
+        @click="$emit('update:modelValue', item)"
       >
         {{ item }}
       </li>
@@ -22,28 +22,28 @@ export default {
   name: 'PagePagination',
 
   props: {
-    page: {
+    modelValue: {
       type: Number,
       default: 1,
     },
   },
 
   emits: {
-    'change-page': null,
+    'update:modelValue': null,
   },
 
   computed: {
     pagination() {
       const arr = [];
 
-      if (this.page > 4) {
+      if (this.modelValue > 4) {
         arr.push(1);
         arr.push('...');
       }
 
-      let from = this.page - 2;
+      let from = this.modelValue - 2;
       from = from > 1 ? from : 1;
-      const to = this.page + 2;
+      const to = this.modelValue + 2;
 
       for (let i = from; i <= to; i += 1) {
         arr.push(i);
