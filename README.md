@@ -1,4 +1,8 @@
-# workle-test
+# Test project for Workle
+
+[Demo](https://workle-test.netlify.app/).
+
+![App screenshot](https://github.com/wukapHo/workle-test/raw/main/screenshot.png)
 
 ## Project setup
 ```
@@ -19,6 +23,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
