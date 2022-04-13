@@ -69,6 +69,7 @@ export default {
 }
 
 .post-list {
+  padding: 10px 0 70px;
   display: flex;
   flex-direction: column;
   gap: 16px;
