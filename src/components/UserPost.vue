@@ -1,21 +1,33 @@
 <template>
   <section class="post">
-    <div class="container">
-      <div class="post__title">
-        <div class="post__avatar">
-          <img :src="image.user.profile_image.small" alt="Avatar">
-        </div>
-        <div class="post__title-wrapper">
-          <p class="post__author">{{ image.user.name }}</p>
-          <p class="post__account">@{{ image.user.social.instagram_username }}</p>
-        </div>
+    <a
+      class="post__title"
+      target="_blank"
+      :href="accountLink"
+      :title="accountLink"
+      :class="{ 'post__title--disabled': !username }"
+    >
+      <div class="post__avatar">
+        <img :src="image.user.profile_image.small" alt="Avatar">
       </div>
-      <div class="post__image">
+      <div class="post__title-wrapper">
+        <p class="post__author">{{ image.user.name }}</p>
+        <p
+          v-if="username"
+          class="post__account"
+        >
+          @{{ username }}
+        </p>
+      </div>
+    </a>
+    <div class="post__image">
+      <picture>
+        <source :srcset="image.urls.regular" media="(min-width: 1000px)">
         <img :src="image.urls.small" :alt="image.alt_description">
-      </div>
-      <div class="post__views">
-        {{ views }}
-      </div>
+      </picture>
+    </div>
+    <div class="post__views">
+      {{ views }}
     </div>
   </section>
 </template>
@@ -37,19 +49,53 @@ export default {
     views() {
       return this.image.likes.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
     },
+
+    username() {
+      const username = this.image.user.social.instagram_username
+        ? this.image.user.social.instagram_username
+        : this.image.user.social.twitter_username;
+
+      return username;
+    },
+
+    accountLink() {
+      const link = this.image.user.social.instagram_username
+        ? `https://www.instagram.com/${this.image.user.social.instagram_username}`
+        : `https://www.twitter.com/${this.image.user.social.twitter_username}`;
+
+      return link;
+    },
   },
 };
 </script>
 
 <style lang="scss">
 .post {
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 48%;
+  }
+
   &__title {
     padding: 10px;
-    width: 100%;
+    width: auto;
     height: 50px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 10px;
+    border: 1px solid transparent;
+    transition: 0.3s;
+
+    &:hover {
+      border: 1px solid #00000050;
+      border-radius: 20px;
+    }
+
+    &--disabled {
+      pointer-events: none;
+      cursor: default;
+    }
   }
 
   &__avatar {
