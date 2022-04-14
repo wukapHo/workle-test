@@ -1,11 +1,13 @@
 <template>
   <div class="container">
     <div class="post-list">
-      <user-post
-        v-for="image in images"
-        :key="image.id"
-        :image="image"
-      />
+      <transition-group name="post-list">
+        <user-post
+          v-for="image in images"
+          :key="image.id"
+          :image="image"
+        />
+      </transition-group>
     </div>
   </div>
   <footer class="footer">
@@ -96,6 +98,20 @@ $width-desc: 1000px;
     flex-wrap: wrap;
     justify-content: space-between;
   }
+}
+
+.post-list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.post-list-enter-active,
+.post-list-leave-active {
+  transition: all 0.5s ease;
+}
+.post-list-enter-from,
+.post-list-leave-to {
+  opacity: 0;
+  transform: translateY(100px);
 }
 
 .footer {
