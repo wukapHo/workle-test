@@ -74,6 +74,11 @@ export default {
   }
 
   &__list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
     padding: 5px;
     border-radius: 10px;
     color: #ffffff;
@@ -87,6 +92,8 @@ export default {
     }
 
     &--active {
+      width: 35px;
+      height: 35px;
       font-size: 22px;
       border: 1px solid #ffffff;
       cursor: default;
