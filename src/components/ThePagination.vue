@@ -1,5 +1,5 @@
 <template>
-  <section class="pagination">
+  <nav class="pagination">
     <ul class="pagination__list">
       <li
         v-for="(item, idx) in pagination"
@@ -14,12 +14,12 @@
         {{ item }}
       </li>
     </ul>
-  </section>
+  </nav>
 </template>
 
 <script>
 export default {
-  name: 'PagePagination',
+  name: 'ThePagination',
 
   props: {
     modelValue: {
@@ -57,14 +57,12 @@ export default {
 
 <style lang="scss">
 .pagination {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  width: 100%;
+  height: 60px;
   background-color: #000000;
   opacity: 0.9;
 

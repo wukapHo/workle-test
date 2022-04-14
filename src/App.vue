@@ -8,18 +8,20 @@
       />
     </div>
   </div>
-  <page-pagination v-model="page" />
+  <footer class="footer">
+    <the-pagination v-model="page" />
+  </footer>
 </template>
 
 <script>
-import getImages from '@/api';
+import getImageList from '@/api';
 import UserPost from '@/components/UserPost.vue';
-import PagePagination from '@/components/PagePagination.vue';
+import ThePagination from '@/components/ThePagination.vue';
 
 export default {
   components: {
     UserPost,
-    PagePagination,
+    ThePagination,
   },
 
   data() {
@@ -29,23 +31,33 @@ export default {
     };
   },
 
-  async mounted() {
-    this.images = await getImages();
+  created() {
+    this.getImages();
   },
 
   watch: {
-    async page() {
-      this.images = await getImages(this.page);
+    page() {
+      this.getImages();
+    },
+  },
+
+  methods: {
+    async getImages() {
+      this.images = await getImageList(this.page);
     },
   },
 };
 </script>
 
 <style lang="scss">
+$width-mob: 420px;
+$width-tab: 768px;
+$width-desc: 1000px;
+
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   color: #000000;
   font-family: 'Roboto Condensed', sans-serif;
   text-decoration: none;
@@ -55,34 +67,40 @@ export default {
   width: 100%;;
   margin: 0 auto;
 
-  @media (min-width: 420px) {
+  @media (min-width: $width-mob) {
     padding: 0 20px;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: $width-tab) {
     padding: 0 54px;
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: $width-desc) {
     max-width: 1920px;
     padding: 0 170px;
   }
 }
 
 .post-list {
-  padding: 10px 0 70px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 10px 0 70px;
 
-  @media (min-width: 420px) {
+  @media (min-width: $width-mob) {
     gap: 0;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: $width-tab) {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
   }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 </style>

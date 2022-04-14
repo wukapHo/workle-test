@@ -1,11 +1,11 @@
 <template>
   <section class="post">
     <a
-      class="post__title"
+      class="post__user"
       target="_blank"
       :href="accountLink"
       :title="accountLink"
-      :class="{ 'post__title--disabled': !username }"
+      :class="{ 'post__user--disabled': !username }"
     >
       <div class="post__avatar">
         <img :src="image.user.profile_image.small" alt="Avatar">
@@ -34,23 +34,18 @@ export default {
   props: {
     image: {
       type: Object,
-      default() {
-        return {};
-      },
+      required: true,
     },
   },
 
   computed: {
     views() {
+      // Splitting a number into digits of three
       return this.image.likes.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
     },
 
     username() {
-      const username = this.image.user.social.instagram_username
-        ? this.image.user.social.instagram_username
-        : this.image.user.social.twitter_username;
-
-      return username;
+      return this.image.user.social.instagram_username || this.image.user.social.twitter_username;
     },
 
     accountLink() {
@@ -72,13 +67,13 @@ export default {
     width: 48%;
   }
 
-  &__title {
-    padding: 10px;
-    width: auto;
-    height: 50px;
+  &__user {
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    width: auto;
+    height: 50px;
+    padding: 10px;
     border: 1px solid transparent;
     transition: 0.3s;
 
@@ -124,8 +119,9 @@ export default {
 
   &__image {
     position: relative;
-    padding-top: 72%;
     width: 100%;
+    margin-top: 10px;
+    padding-top: 72%;
 
     img {
       position: absolute;
@@ -140,9 +136,9 @@ export default {
   }
 
   &__views {
-    padding: 10px 35px 0;
     width: 100%;
     height: 25px;
+    padding: 10px 35px 0;
     background: url('../assets/svg/eye.svg') no-repeat right 10px bottom 3px;
     font-size: 12px;
     line-height: 14px;
