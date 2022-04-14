@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="post-list">
-      <transition-group name="post-list">
+      <transition-group name="list">
         <user-post
           v-for="image in images"
           :key="image.id"
@@ -100,16 +100,18 @@ $width-desc: 1000px;
   }
 }
 
-.post-list-item {
+.list-item {
   display: inline-block;
   margin-right: 10px;
 }
-.post-list-enter-active,
+
+.list-enter-active,
 .post-list-leave-active {
-  transition: all 0.5s ease;
+  transition: all 1s ease;
 }
-.post-list-enter-from,
-.post-list-leave-to {
+
+.list-enter-from,
+.list-leave-to {
   opacity: 0;
   transform: translateY(100px);
 }
