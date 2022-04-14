@@ -64,7 +64,6 @@ export default {
   }
 
   @media (min-width: 1000px) {
-    max-width: 1580px;
     padding: 0 170px;
   }
 }
