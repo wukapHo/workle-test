@@ -1,5 +1,7 @@
 # Test project for Workle
 
+## [Layout](https://www.figma.com/file/TSike5vJs4oQSbAAh13oZ0/WTZ)
+
 ## [Demo](https://workle-test.netlify.app/)
 
 ![App screenshot](https://github.com/wukapHo/workle-test/raw/main/screenshot.png)
